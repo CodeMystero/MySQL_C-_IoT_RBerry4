@@ -1,0 +1,50 @@
+//네임스페이스 추가
+using MySql.Data.MySqlClient;
+
+//접속query
+string Conn = "Server=localhost;Database=####;Uid=####;Pwd=####;";  
+
+//검색구문 - 추천버전
+using (MySqlConnection conn = new MySqlConnection(Conn))
+{           
+        DataSet ds = new DataSet();
+        string sql = "SELECT * FROM ~";
+        MySqlDataAdapter adpt = new MySqlDataAdapter(sql, conn);
+        adpt.Fill(ds, "~");
+}
+
+//검색구문 - 구버전
+using (MySqlConnection conn = new MySqlConnection(Conn))
+{      
+	conn.Open();
+	string sql = "select * from ~";
+	MySqlCommand msc = new MySqlCommand(sql,conn);
+	MySqlDataReader msdr = msc.ExecuteReader();
+	while(msdr.Read()){
+		
+	}
+	msdr.Close();
+}
+//삽입구문
+using (MySqlConnection conn = new MySqlConnection(Conn))
+{
+     conn.Open();
+     MySqlCommand msc = new MySqlCommand("INSERT INTO ~", conn);
+     msc.ExecuteNonQuery();
+}
+
+//수정구문
+using (MySqlConnection conn = new MySqlConnection(Conn))
+{
+     conn.Open();
+     MySqlCommand msc = new MySqlCommand("UPDATE ~ SET ~", conn);
+     msc.ExecuteNonQuery();
+}
+
+//삭제구문
+using (MySqlConnection conn = new MySqlConnection(Conn))
+{
+     conn.Open();
+     MySqlCommand msc = new MySqlCommand("DELETE FROM ~", conn);
+     msc.ExecuteNonQuery();
+}
